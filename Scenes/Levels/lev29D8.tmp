@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dem2jo1omq12a"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_0u6jv"]
+[ext_resource type="Script" path="res://Scenes/Levels/MainCamera.gd" id="2_2jsrl"]
+[ext_resource type="PackedScene" uid="uid://csrtdebx8iosm" path="res://Scenes/Models/Connect4Board.tscn" id="3_gsy76"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufqt2"]
+albedo_color = Color(0.137255, 0.298039, 0.133333, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a36p4"]
+material = SubResource("StandardMaterial3D_ufqt2")
+size = Vector3(30, 1, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8byj"]
+size = Vector3(30, 1, 30)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_0u6jv")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 4)
+fov = 60.0
+script = ExtResource("2_2jsrl")
+
+[node name="RayCast3D" type="RayCast3D" parent="MainCamera"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -100)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_a36p4")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_v8byj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 5)
+
+[node name="connect4board" parent="." instance=ExtResource("3_gsy76")]

@@ -11,5 +11,24 @@ config_version=5
 [application]
 
 config/name="Multiplayer Connect 4"
+run/main_scene="res://Scenes/Levels/level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+InteractionManager="*res://Scripts/InteractionManager.gd"
+Global="*res://Scripts/global.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[input]
+
+interact={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(104, 18),"global_position":Vector2(108, 59),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
