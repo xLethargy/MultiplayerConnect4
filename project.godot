@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Multiplayer Connect 4"
-run/main_scene="res://Scenes/Levels/level.tscn"
+run/main_scene="res://Scenes/Multiplayer/multiplayer_canvas.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

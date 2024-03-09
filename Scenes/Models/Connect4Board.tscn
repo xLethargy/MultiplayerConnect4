@@ -252,7 +252,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6cw1k")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_75nes"]
-size = Vector3(0.5, 0.5, 0.25)
+size = Vector3(0.5, 1.00003, 0.25)
 
 [node name="connect4board" type="StaticBody3D"]
 script = ExtResource("1_tei2f")
@@ -307,6 +307,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnOne" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnOne/InteractionArea"]
@@ -317,6 +318,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnTwo" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnTwo/InteractionArea"]
@@ -327,6 +329,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnThree" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnThree/InteractionArea"]
@@ -337,6 +340,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnFour" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnFour/InteractionArea"]
@@ -347,6 +351,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnFive" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnFive/InteractionArea"]
@@ -357,6 +362,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnSix" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnSix/InteractionArea"]
@@ -367,6 +373,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.013)
 script = ExtResource("1_o4djl")
 
 [node name="InteractionArea" type="Area3D" parent="Interactables/ColumnSeven" groups=["CoinPlacement", "Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 script = ExtResource("2_lcq7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/ColumnSeven/InteractionArea"]

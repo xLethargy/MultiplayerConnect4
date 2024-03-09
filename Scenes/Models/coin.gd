@@ -1,7 +1,9 @@
 extends RigidBody3D
 
+var frozen = false
+
 var space_landing = 0
-var space_to_land = 0.06
+@export var space_to_land = 0.06
 
 var in_position = false
 
@@ -31,12 +33,15 @@ func _ready():
 
 func _process(delta):
 	if !freeze:
-		$Meshes.rotate_z(random_speed * delta)
+		update_coin_position.rpc(space_to_land, delta)
+
+
+@rpc("any_peer", "call_local")
+func update_coin_position(landing_space, delta):
+	$Meshes.rotate_z(random_speed * delta)
 	
-	if global_position.y <= space_to_land and !in_position:
+	if global_position.y <= landing_space and !in_position:
 		in_position = true
-		global_position.y = space_to_land
+		global_position.y = landing_space
 		audio_player.playing = true
 		freeze = true
-		
-		

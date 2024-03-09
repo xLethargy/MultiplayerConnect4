@@ -2,4 +2,4 @@
 
 [resource]
 cull_mode = 1
-albedo_color = Color(0.694118, 0.603922, 0.133333, 1)
+albedo_color = Color(0.862745, 0.733333, 0.254902, 1)

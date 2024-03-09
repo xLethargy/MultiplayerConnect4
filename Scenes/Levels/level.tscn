@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://dem2jo1omq12a"]
+[gd_scene load_steps=19 format=3 uid="uid://dem2jo1omq12a"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_0u6jv"]
-[ext_resource type="Script" path="res://Scenes/Levels/MainCamera.gd" id="2_2jsrl"]
 [ext_resource type="PackedScene" uid="uid://csrtdebx8iosm" path="res://Scenes/Models/Connect4Board.tscn" id="3_gsy76"]
 [ext_resource type="Script" path="res://Scenes/Levels/CanvasLayer.gd" id="4_ndd28"]
 [ext_resource type="StyleBox" uid="uid://bvu7vhrmxp86a" path="res://Materials/button.tres" id="5_08enp"]
@@ -144,7 +143,6 @@ script = ExtResource("1_0u6jv")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 4)
 fov = 60.0
-script = ExtResource("2_2jsrl")
 
 [node name="RayCast3D" type="RayCast3D" parent="MainCamera"]
 unique_name_in_owner = true

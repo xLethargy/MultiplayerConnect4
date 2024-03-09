@@ -1,5 +1,8 @@
 extends Node
 
+var level_scene = "res://Scenes/Levels/level.tscn"
+
+var players = {}
 
 var players_turn = 0:
 	get:
@@ -29,3 +32,11 @@ func reset_globals():
 	game_in_progress = true
 	winner = null
 	patterns = 0
+
+
+func change_scene():
+	call_deferred("_deferred_scene_load")
+
+
+func _deferred_scene_load():
+	get_tree().change_scene_to_file(level_scene)

@@ -21,13 +21,13 @@ func check_the_board():
 				Global.game_in_progress = false
 				Global.winner = Global.players_turn_no_change
 				Global.patterns += 1
-				get_tree().current_scene.display_winner()
+				get_tree().current_scene.display_winner.rpc()
 			elif coin_position_board[i][j + 3] != 0 and (coin_position_board[i][j + 3] == coin_position_board[i + 1][j + 3]) and (coin_position_board[i][j + 3] == coin_position_board[i + 2][j + 3]) and (coin_position_board[i][j + 3] == coin_position_board[i + 3][j + 3]):
 				print ("connect 4 horizontal ", Global.players_turn_no_change)
 				Global.game_in_progress = false
 				Global.winner = Global.players_turn_no_change
 				Global.patterns += 1
-				get_tree().current_scene.display_winner()
+				get_tree().current_scene.display_winner.rpc()
 			
 			# vertical check
 			if coin_position_board[i][j] != 0 and (coin_position_board[i][j] == coin_position_board[i][j + 1]) and (coin_position_board[i][j] == coin_position_board[i][j + 2]) and (coin_position_board[i][j] == coin_position_board[i][j + 3]):
@@ -35,14 +35,14 @@ func check_the_board():
 				Global.game_in_progress = false
 				Global.winner = Global.players_turn_no_change
 				Global.patterns += 1
-				get_tree().current_scene.display_winner()
+				get_tree().current_scene.display_winner.rpc()
 			elif i != 0:
 				if coin_position_board[i + 3][j] != 0 and (coin_position_board[i + 3][j] == coin_position_board[i + 3][j + 1]) and (coin_position_board[i + 3][j] == coin_position_board[i + 3][j + 2]) and (coin_position_board[i + 3][j] == coin_position_board[i + 3][j + 3]):
 					print ("connect 4 vertical ", Global.players_turn_no_change)
 					Global.game_in_progress = false
 					Global.winner = Global.players_turn_no_change
 					Global.patterns += 1
-					get_tree().current_scene.display_winner()
+					get_tree().current_scene.display_winner.rpc()
 			
 			# diagonal check
 			if coin_position_board[i][j] != 0 and (coin_position_board[i][j] == coin_position_board[i + 1][j + 1]) and (coin_position_board[i][j] == coin_position_board[i + 2][j + 2]) and (coin_position_board[i][j] == coin_position_board[i + 3][j + 3]):
@@ -50,12 +50,12 @@ func check_the_board():
 				Global.game_in_progress = false
 				Global.winner = Global.players_turn_no_change
 				Global.patterns += 1
-				get_tree().current_scene.display_winner()
+				get_tree().current_scene.display_winner.rpc()
 			
 			if coin_position_board[i][j + 3] != 0 and (coin_position_board[i][j + 3] == coin_position_board[i + 1][j + 2]) and (coin_position_board[i][j + 3] == coin_position_board[i + 2][j + 1]) and (coin_position_board[i][j + 3] == coin_position_board[i + 3][j]):
 				print ("connect 4 diagonaly negative ", i, " ", j)
 				Global.game_in_progress = false
 				Global.winner = Global.players_turn_no_change
 				Global.patterns += 1
-				get_tree().current_scene.display_winner()
+				get_tree().current_scene.display_winner.rpc()
 			
