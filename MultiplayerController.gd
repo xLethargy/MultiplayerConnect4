@@ -4,6 +4,8 @@ extends CanvasLayer
 @export var port = 8910
 var peer
 
+var player_count = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
@@ -14,14 +16,17 @@ func _ready():
 
 # Called on the server and clients when someone connects
 func peer_connected(id):
+	player_count += 1
 	print ("player connected " + str(id))
 
 # Called on the server and clients when someone disconnects
 func peer_disconnected(id):
+	player_count -= 1
 	print ("player disconnected " + str(id))
 
 # Called only from clients when a client connects to a server
 func connected_to_server():
+	player_count += 1
 	print ("connected to server")
 	send_player_information.rpc_id(1, $LineEdit.text, multiplayer.get_unique_id())
 
@@ -60,7 +65,8 @@ func send_player_information(name, id):
 		Global.players[id] = {
 			"name": name,
 			"id": id,
-			"score": 0
+			"score": 0,
+			"number": player_count
 		}
 	
 	if multiplayer.is_server():
@@ -70,4 +76,4 @@ func send_player_information(name, id):
 
 @rpc("any_peer", "call_local")
 func start_game():
-	get_tree().change_scene_to_file("res://Scenes/Levels/level.tscn")
+	Global.change_scene()

@@ -55,7 +55,6 @@ func _spawn_coin():
 		coin.body.set_surface_override_material(0, yellow)
 	
 	board.check_the_board()
-	#coin.rpc("update_coin_position", space_landing)
 
 
 @rpc("any_peer", "call_local")

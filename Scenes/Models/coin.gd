@@ -22,6 +22,7 @@ var random_audio = 0
 var wood_click_sound
 
 func _ready():
+	self.name = "Coin"
 	random_audio = randi_range(0, 2)
 	wood_click_sound = audio_array[random_audio]
 	audio_player.stream = wood_click_sound
@@ -43,5 +44,7 @@ func update_coin_position(landing_space, delta):
 	if global_position.y <= landing_space and !in_position:
 		in_position = true
 		global_position.y = landing_space
-		audio_player.playing = true
 		freeze = true
+		
+		if audio_player != null:
+			audio_player.playing = true

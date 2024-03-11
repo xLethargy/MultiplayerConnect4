@@ -1,5 +1,7 @@
 extends Node
 
+var camera
+
 var level_scene = "res://Scenes/Levels/level.tscn"
 
 var players = {}
@@ -20,7 +22,6 @@ var game_in_progress = true:
 var winner = null:
 	set(value):
 		winner = players_turn_no_change
-		print (winner)
 
 var patterns = 0:
 	set(value):

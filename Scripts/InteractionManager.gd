@@ -19,3 +19,4 @@ func _input(event: InputEvent) -> void:
 	if active_area != null:
 		if event.is_action_pressed("interact") and active_area.is_in_group("CoinPlacement") and can_interact:
 			active_area.interact.call()
+			can_interact = false
