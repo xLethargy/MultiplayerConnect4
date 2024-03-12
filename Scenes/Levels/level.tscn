@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://dem2jo1omq12a"]
+[gd_scene load_steps=21 format=3 uid="uid://dem2jo1omq12a"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_0u6jv"]
 [ext_resource type="PackedScene" uid="uid://csrtdebx8iosm" path="res://Scenes/Models/Connect4Board.tscn" id="3_gsy76"]
 [ext_resource type="Script" path="res://Scenes/Levels/CanvasLayer.gd" id="4_ndd28"]
 [ext_resource type="StyleBox" uid="uid://bvu7vhrmxp86a" path="res://Materials/button.tres" id="5_08enp"]
+[ext_resource type="PackedScene" uid="uid://cjr2d0a42r2dd" path="res://Scenes/Models/hover_coin.tscn" id="5_y1btn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufqt2"]
 albedo_color = Color(0.137255, 0.298039, 0.133333, 1)
@@ -136,6 +137,17 @@ shadow_mesh = SubResource("ArrayMesh_hwv1e")
 [sub_resource type="Theme" id="Theme_84nu3"]
 default_font_size = 64
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_edlmw"]
+properties/0/path = NodePath("Coin:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Coin:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Coin:visible")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_0u6jv")
 
@@ -221,5 +233,16 @@ theme_override_colors/font_hover_pressed_color = Color(0.388235, 0.388235, 0.388
 theme_override_styles/normal = ExtResource("5_08enp")
 theme_override_styles/hover = ExtResource("5_08enp")
 text = "PLAY AGAIN"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CanvasLayer"]
+replication_config = SubResource("SceneReplicationConfig_edlmw")
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="HoverCoin" parent="Objects" instance=ExtResource("5_y1btn")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Objects"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Models/hover_coin.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]

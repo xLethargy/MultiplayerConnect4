@@ -1,15 +1,16 @@
 extends CanvasLayer
 
-@export var address = "127.0.0.1"
-@export var port = 8910
-var peer
+const port = 9999
+@onready var address_entry = "127.0.0.1"
 
 var player_count = 0
 
+var enet_peer = ENetMultiplayerPeer.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	multiplayer.peer_connected.connect(peer_connected)
-	multiplayer.peer_disconnected.connect(peer_disconnected)
+	
+	
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 
@@ -28,30 +29,26 @@ func peer_disconnected(id):
 func connected_to_server():
 	player_count += 1
 	print ("connected to server")
-	send_player_information.rpc_id(1, $LineEdit.text, multiplayer.get_unique_id())
+	send_player_information.rpc_id(1, multiplayer.get_unique_id())
 
 # Called only from clients when connection fails
 func connection_failed():
 	print ("connection failed")
 
 func _on_host_pressed():
-	peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(port, 2)
-	if error != OK:
-		print ("cannot host: ", error)
-		return
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	
-	multiplayer.set_multiplayer_peer(peer)
+	enet_peer.create_server(port)
+	multiplayer.multiplayer_peer = enet_peer
+	multiplayer.peer_connected.connect(peer_connected)
+	multiplayer.peer_disconnected.connect(peer_disconnected)
 	print ("Waiting for players...")
-	send_player_information($LineEdit.text, multiplayer.get_unique_id())
+	send_player_information(multiplayer.get_unique_id())
+	
+	upnp_setup()
 
 
 func _on_join_pressed():
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(address, port)
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER) # COMPRESSION MUST BE THE SAME AS SERVER AND CLIENT
-	multiplayer.set_multiplayer_peer(peer)
+	enet_peer.create_client(address_entry, port)
+	multiplayer.multiplayer_peer = enet_peer
 
 
 func _on_start_pressed():
@@ -60,10 +57,9 @@ func _on_start_pressed():
 
 
 @rpc("any_peer")
-func send_player_information(name, id):
+func send_player_information(id):
 	if !Global.players.has(id):
 		Global.players[id] = {
-			"name": name,
 			"id": id,
 			"score": 0,
 			"number": player_count
@@ -71,9 +67,26 @@ func send_player_information(name, id):
 	
 	if multiplayer.is_server():
 		for i in Global.players:
-			send_player_information.rpc(Global.players[i].name, i)
+			send_player_information.rpc(i)
 
 
 @rpc("any_peer", "call_local")
 func start_game():
 	Global.change_scene()
+
+
+func upnp_setup():
+	var upnp = UPNP.new()
+	
+	var discover_result = upnp.discover()
+	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, \
+		"UPNP Discover Failed! Error %s" % discover_result)
+	
+	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), \
+		"UPNP Invalid Gateway!")
+	
+	var map_result = upnp.add_port_mapping(port)
+	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, \
+		"UPNP Port Mapping Failed! Error %s" % map_result)
+	
+	print ("Success! Join Address: %s" % upnp.query_external_address())

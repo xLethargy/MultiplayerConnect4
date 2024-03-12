@@ -9,7 +9,7 @@ var spin_the_coin = false
 @onready var yellow = preload("res://Materials/yellow.tres")
 
 func _process(delta):
-	_spin_coin.rpc(delta)
+	_spin_coin(delta)
 	
 
 @rpc("any_peer", "call_local")
@@ -35,7 +35,7 @@ func display_winner():
 		coin.get_child(0).set_surface_override_material(0, yellow)
 
 
-@rpc("any_peer", "call_local")
+
 func _spin_coin(delta):
 	if spin_the_coin:
 		coin.rotate_y(7 * delta)

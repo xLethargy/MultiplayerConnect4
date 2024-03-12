@@ -12,11 +12,12 @@ var coin = null
 
 @onready var player_scene = preload("res://Scenes/Multiplayer/player.tscn")
 
+@onready var objects_node = $Objects
+
 func _ready():
 	Global.camera = camera
 	
 	for i in Global.players:
-		print ("PLAYERS")
 		var current_player = player_scene.instantiate()
 		current_player.name = str(Global.players[i].id)
 		Global.camera.add_child(current_player)
